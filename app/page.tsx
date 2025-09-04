@@ -1,4 +1,6 @@
-// src/app/page.tsx
+
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import foodbanner from './images/foodbanner.jpg';
