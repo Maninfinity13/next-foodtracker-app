@@ -88,6 +88,16 @@ export default function RegisterForm() {
           </button>
         </form>
 
+        {/* Back to Home Button */}
+        <div className="mt-4">
+          <Link
+            href="/"
+            className="inline-block px-6 py-3 bg-white/80 text-indigo-700 font-semibold rounded-full shadow-md hover:bg-white transition-colors duration-300"
+          >
+            ← Back to Home
+          </Link>
+        </div>
+
         <p className="mt-6 text-white text-sm md:text-base">
           Already have an account?{' '}
           <Link href="/login" className="font-bold hover:underline">
