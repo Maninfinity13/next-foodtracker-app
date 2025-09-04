@@ -5,7 +5,7 @@ import foodbanner from './images/foodbanner.jpg';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-4 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-4 text-center">
 
       {/* Content Card */}
       <div className="flex w-full max-w-3xl flex-col items-center justify-center rounded-3xl bg-white/20 p-8 text-center shadow-2xl backdrop-blur-lg transition-transform duration-500 hover:scale-105">
@@ -30,7 +30,8 @@ export default function Home() {
           />
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        {/* Buttons */}
+        <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             href="/register"
             className="w-full transform rounded-full bg-white px-8 py-3 font-bold text-indigo-600 shadow-xl transition-colors duration-300 hover:-translate-y-1 hover:bg-gray-100 sm:w-auto"
@@ -44,11 +45,13 @@ export default function Home() {
           >
             Login
           </Link>
-          
         </div>
-      </div>
 
-      
+        {/* Footer inside the card */}
+        <footer className="text-sm text-white opacity-80">
+          Create by <span className="font-semibold">Phatcharapol-DTI</span>
+        </footer>
+      </div>
     </div>
   );
 }
