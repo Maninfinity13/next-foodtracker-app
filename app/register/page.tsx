@@ -1,23 +1,15 @@
-// src/app/register/page.tsx
 'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'Register - Food Tracker',
-  description: 'Register for a new account on Food Tracker.',
-};
-
-export default function Register() {
+export default function RegisterForm() {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    let reader = new FileReader();
-    let file = e.target.files?.[0];
-
+    const file = e.target.files?.[0];
     if (file) {
+      const reader = new FileReader();
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
           setImagePreviewUrl(reader.result);
@@ -79,7 +71,11 @@ export default function Register() {
             </label>
             {imagePreviewUrl && (
               <div className="mt-4">
-                <img src={imagePreviewUrl} alt="Image Preview" className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-white" />
+                <img
+                  src={imagePreviewUrl}
+                  alt="Image Preview"
+                  className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-white"
+                />
               </div>
             )}
           </div>
