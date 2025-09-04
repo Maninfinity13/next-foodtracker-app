@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next-Food-App-Phatchatapol",
+  title: "Food-App-Phatchatapol",
   description: "app-Food",
 };
 
