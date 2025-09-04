@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
-import avatarImg from '../../../images/profile.png'; // รูปโปรไฟล์จาก app/images
+import avatarImg from '../../images/profile.png'; // รูปโปรไฟล์จาก app/images
 
 export default function UpdateFoodPage() {
   const router = useRouter();
