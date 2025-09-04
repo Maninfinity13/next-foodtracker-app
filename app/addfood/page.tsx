@@ -36,6 +36,12 @@ export default function AddFoodPage() {
     setPreviewImage(null);
   };
 
+  const handleLogout = () => {
+    // Logic logout เช่น ลบ token หรือ localStorage
+    alert('Logged out!');
+    // router.push('/login'); // ถ้ามีหน้า login
+  };
+
   return (
     <>
       <Head>
@@ -50,22 +56,33 @@ export default function AddFoodPage() {
           <Link href="/dashboard" className="flex items-center gap-2 text-white font-bold hover:underline">
             &larr; Back to Dashboard
           </Link>
+
           <h1 className="text-3xl md:text-5xl font-extrabold drop-shadow-lg">
             Add Food
           </h1>
-          <Link
-            href="/profile"
-            className="flex items-center gap-2 bg-white/20 rounded-full px-3 py-1 hover:bg-white/30 transition-colors"
-          >
-            <Image
-              src={avatarImg}
-              alt={user.name}
-              width={40}
-              height={40}
-              className="rounded-full object-cover"
-            />
-            <span className="text-white font-semibold text-base md:text-lg">{user.name}</span>
-          </Link>
+
+          {/* Profile + Logout */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/profile"
+              className="flex items-center gap-2 bg-white/20 rounded-full px-3 py-1 hover:bg-white/30 transition-colors"
+            >
+              <Image
+                src={avatarImg}
+                alt={user.name}
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+              <span className="text-white font-semibold text-base md:text-lg">{user.name}</span>
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-full font-bold transition-colors duration-300"
+            >
+              Logout
+            </button>
+          </div>
         </div>
 
         {/* Form */}
@@ -113,21 +130,18 @@ export default function AddFoodPage() {
             />
           </div>
 
+          {/* Food Image */}
           <div className="flex flex-col">
             <label className="mb-2 font-semibold text-white">Food Image</label>
-
-            {/* ปุ่มเลือกไฟล์ */}
             <label className="inline-block px-6 py-3 bg-indigo-600 text-white font-bold rounded-full shadow-md cursor-pointer hover:bg-indigo-700 transition-colors duration-300">
               Choose Image
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="hidden" // ซ่อน input จริง
+                className="hidden"
               />
             </label>
-
-            {/* แสดง preview */}
             {previewImage && (
               <div className="mt-4 flex flex-col items-center">
                 <p className="mb-2 font-semibold text-white">Preview:</p>

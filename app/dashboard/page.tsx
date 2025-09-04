@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from 'next/image';
 import { FaEdit, FaTrash, FaSearch, FaArrowLeft } from 'react-icons/fa';
+import avatarImg from '../images/profile.png'; // รูปโปรไฟล์จาก app/images
 
-// Mock data for demonstration
+// Mock data
 const mockFoods = [
     { id: 1, date: '2025-09-01', image: 'https://i.pinimg.com/736x/94/d2/f1/94d2f1dcd0051aaaabee7a10a9ae8b4e.jpg', foodName: 'Chicken Salad', mealType: 'Lunch' },
     { id: 2, date: '2025-09-01', image: 'https://i.pinimg.com/736x/94/d2/f1/94d2f1dcd0051aaaabee7a10a9ae8b4e.jpg', foodName: 'Green Smoothie', mealType: 'Breakfast' },
@@ -25,16 +27,20 @@ const mockFoods = [
 
 const ITEMS_PER_PAGE = 7;
 
-export default function Page() {
+export default function DashboardPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
 
-    // Filter foods based on search query
+    const user = { name: 'John Doe' };
+
+    const handleLogout = () => {
+        alert('Logged out!');
+    };
+
     const filteredFoods = mockFoods.filter(food =>
         food.foodName.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Calculate pages for pagination
     const totalPages = Math.ceil(filteredFoods.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const currentItems = filteredFoods.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -46,22 +52,43 @@ export default function Page() {
                 <meta name="description" content="Manage your food tracking on the dashboard." />
             </Head>
 
-            {/* Main container with a vibrant gradient background */}
             <div className="min-h-screen p-6 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white">
 
-                {/* Back button and title section */}
+                {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <Link href="/" className="flex items-center gap-2 text-white font-bold hover:underline">
                         <FaArrowLeft />
                         <span>Back to Home</span>
                     </Link>
+
                     <h1 className="text-3xl md:text-5xl font-extrabold drop-shadow-lg">
                         Dashboard
                     </h1>
-                    <div></div> {/* For spacing */}
+
+                    <div className="flex items-center gap-4">
+                        <Link
+                            href="/profile"
+                            className="flex items-center gap-2 bg-white/20 rounded-full px-3 py-1 hover:bg-white/30 transition-colors"
+                        >
+                            <Image
+                                src={avatarImg}
+                                alt={user.name}
+                                width={40}
+                                height={40}
+                                className="rounded-full object-cover"
+                            />
+                            <span className="text-white font-semibold text-base md:text-lg">{user.name}</span>
+                        </Link>
+                        <button
+                            onClick={handleLogout}
+                            className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-full font-bold transition-colors duration-300"
+                        >
+                            Logout
+                        </button>
+                    </div>
                 </div>
 
-                {/* Action bar: Add Food and Search */}
+                {/* Action bar */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
                     <Link href="/addfood" className="w-full md:w-auto px-6 py-3 bg-white text-indigo-600 font-bold rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 transform hover:-translate-y-1 text-center">
                         Add Food
@@ -73,20 +100,17 @@ export default function Page() {
                             value={searchQuery}
                             onChange={(e) => {
                                 setSearchQuery(e.target.value);
-                                setCurrentPage(1); // Reset to first page on search
+                                setCurrentPage(1);
                             }}
                             className="w-full bg-transparent text-white placeholder-white focus:outline-none px-2"
                         />
-                        <button
-                            onClick={() => { }}
-                            className="p-2 text-white rounded-full hover:bg-white/20 transition-colors"
-                        >
+                        <button className="p-2 text-white rounded-full hover:bg-white/20 transition-colors">
                             <FaSearch />
                         </button>
                     </div>
                 </div>
 
-                {/* Food tracking table */}
+                {/* Food Table */}
                 <div className="bg-white/20 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
                     <table className="min-w-full divide-y divide-white/30">
                         <thead className="bg-white/30">
@@ -121,7 +145,7 @@ export default function Page() {
                     </table>
                 </div>
 
-                {/* Pagination Controls */}
+                {/* Pagination */}
                 {totalPages > 1 && (
                     <div className="mt-8 flex items-center justify-center space-x-2">
                         <button
